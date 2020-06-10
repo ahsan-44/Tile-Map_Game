@@ -13,11 +13,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
+        Movement();
     }
     public void Movement()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
-        rigid.velocity = new Vector2(horizontalInput, rigid.velocity.x);
+        rigid.velocity = new Vector2(horizontalInput, rigid.velocity.y);
     }
 }
