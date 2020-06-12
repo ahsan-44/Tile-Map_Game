@@ -9,12 +9,14 @@ public class Player : MonoBehaviour
    public float speed = 3f;
     public float jump = 2f;
     public bool grounded = false;
-   // private bool resetGroundedNeeded = false;
+    // private bool resetGroundedNeeded = false;
+    public PlayerAnimation anim;
 
 
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<PlayerAnimation>();
     }
 
     void Update()
@@ -30,6 +32,8 @@ public class Player : MonoBehaviour
             rigid.velocity = new UnityEngine.Vector2(rigid.velocity.x, jump);
             grounded = false;
         }
+        rigid.velocity = new UnityEngine.Vector2(horizontalInput * speed, rigid.velocity.y);
+        anim.Move(horizontalInput);
 
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, UnityEngine.Vector2.down, 0.6f, 1 << 8);
         Debug.DrawLine(transform.position, UnityEngine.Vector2.down * 0.6f, Color.red);
@@ -38,6 +42,6 @@ public class Player : MonoBehaviour
             grounded = true;
         }
 
-        rigid.velocity = new UnityEngine.Vector2(horizontalInput * speed, rigid.velocity.y);
+        
     }
 }
