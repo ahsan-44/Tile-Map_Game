@@ -7,7 +7,7 @@ public class PlayerAnimation : MonoBehaviour
     private Animator anim;
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame

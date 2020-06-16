@@ -5,43 +5,34 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Rigidbody2D rigid;
+   private Rigidbody2D rb;
+   public PlayerAnimation _anim;
    public float speed = 3f;
-    public float jump = 2f;
-    public bool grounded = false;
-    // private bool resetGroundedNeeded = false;
-    public PlayerAnimation anim;
+   public bool grounded = false;
+   public float jumpForce = 10f;
 
+    void Start() 
+  {
+      rb = GetComponent<Rigidbody2D>();
+      _anim = GetComponent<PlayerAnimation>();  
+  }
 
-    void Start()
-    {
-        rigid = GetComponent<Rigidbody2D>();
-        anim = GetComponent<PlayerAnimation>();
-    }
+void Update()
+{
+    Movement();
+}
+public void Movement()
+{
+    float move = Input.GetAxisRaw("Horizontal");
+   if(Input.GetKeyDown(KeyCode.Space) && grounded== true)
+   {
+       rb.velocity = new UnityEngine.Vector2(rb.velocity.x, jumpForce);
+       
+   }
 
-    void Update()
-    {
-        Movement();
-    }
-    public void Movement()
-    {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
+    rb.velocity = new UnityEngine.Vector2( move*speed, rb.velocity.y);
+    _anim.Move(move);
 
-        if (Input.GetKeyDown(KeyCode.Space) && grounded == true)
-        {
-            rigid.velocity = new UnityEngine.Vector2(rigid.velocity.x, jump);
-            grounded = false;
-        }
-        rigid.velocity = new UnityEngine.Vector2(horizontalInput * speed, rigid.velocity.y);
-        anim.Move(horizontalInput);
+}
 
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, UnityEngine.Vector2.down, 0.6f, 1 << 8);
-        Debug.DrawLine(transform.position, UnityEngine.Vector2.down * 0.6f, Color.red);
-         if(hitInfo.collider != null)
-        {
-            grounded = true;
-        }
-
-        
-    }
 }
