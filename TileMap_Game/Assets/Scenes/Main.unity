@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 6272432}
   - component: {fileID: 6272430}
   - component: {fileID: 6272435}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,9 +155,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 0}
-  speed: 5
+  speed: 3
   grounded: 1
-  jumpForce: 10
+  jumpForce: 6
+  resetJumpNeeded: 0
 --- !u!61 &6272431
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22644,7 +22645,7 @@ GameObject:
   - component: {fileID: 1432959746}
   - component: {fileID: 1432959745}
   - component: {fileID: 1432959749}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
