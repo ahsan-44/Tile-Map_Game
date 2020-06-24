@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour
 {
@@ -27,7 +28,7 @@ void Update()
 }
 public void Movement()
 {
-    float move = Input.GetAxisRaw("Horizontal");
+        float move = CrossPlatformInputManager.GetAxis("Horizontal"); // Input.GetAxisRaw("Horizontal");
 
     if(move > 0)
     {
@@ -39,7 +40,7 @@ public void Movement()
     }
 
 
-   if(Input.GetKeyDown(KeyCode.Space) && grounded== true)
+   if((Input.GetKeyDown(KeyCode.Space) || CrossPlatformInputManager.GetButtonDown("B_Jump")) && grounded== true)
    {
        rb.velocity = new UnityEngine.Vector2(rb.velocity.x, jumpForce);
        grounded = false;
