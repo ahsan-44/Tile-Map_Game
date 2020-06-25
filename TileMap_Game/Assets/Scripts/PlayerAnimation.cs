@@ -15,4 +15,8 @@ public class PlayerAnimation : MonoBehaviour
     {
         anim.SetFloat("Move", Mathf.Abs(move));
     }
+    public void Attack()
+    {
+        anim.SetTrigger("Attack");
+    }
 }
