@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
    public float jumpForce = 6f;
    public bool resetJumpNeeded = false;
    private SpriteRenderer sr;
+   
 
     void Start() 
   {
@@ -24,11 +25,16 @@ public class Player : MonoBehaviour
 void Update()
 {
     Movement();
-    CheckGrounded();
+    //CheckGrounded();
+        if(Input.GetMouseButtonDown(0) && CheckGrunded() == true)
+        {
+            _anim.Attack();
+        }
 }
 public void Movement()
 {
         float move = CrossPlatformInputManager.GetAxis("Horizontal"); // Input.GetAxisRaw("Horizontal");
+        grounded = CheckGrunded();
 
     if(move > 0)
     {
@@ -54,8 +60,8 @@ public void Movement()
 
 }
 
-void CheckGrounded()
-{
+   bool CheckGrunded()
+   {
     RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, UnityEngine.Vector2.down, 0.6f, 1<<8);
     Debug.DrawLine(transform.position,UnityEngine.Vector2.down * 0.6f, Color.blue);
 
@@ -65,10 +71,12 @@ void CheckGrounded()
         if(resetJumpNeeded == false)
         {
              grounded = true;
+                return true;
         }
+            
     }
-
-}
+        return false;
+    }
  IEnumerator ResetJumpCall()
  {
      yield return new WaitForSeconds(0.1f);
