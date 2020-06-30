@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    protected float speed;
+    protected int health;
+    protected int coins;
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Attack()
     {
-        
+        Debug.Log("Sunail....." + this.gameObject.name);
     }
 }
